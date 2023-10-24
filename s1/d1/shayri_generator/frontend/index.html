@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #container {
+            margin: 20px;
+        }
+        select, input {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        #generate-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 20px;
+            width:60%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Text Generator</h1>
+    <div id="container">
+        <select id="generation-type">
+            <option value="quotes">Quotes</option>
+            <option value="shayari">Shayari</option>
+            <option value="story">Story</option>
+        </select>
+        <input type="text" id="user-input" placeholder="Enter a word or sentence">
+        <button id="generate-button">Generate</button>
+    </div>
+    <div id="output">
+        <!-- Generated text will be displayed here -->
+    </div>
+    <script>
+        const generateButton = document.getElementById('generate-button');
+        const generationTypeSelect = document.getElementById('generation-type');
+        const userInput = document.getElementById('user-input');
+        const outputDiv = document.getElementById('output');
+
+        generateButton.addEventListener('click', async () => {
+        const selectedType = generationTypeSelect.value;
+        const inputText = userInput.value;
+
+        // Create a data object to send in the POST request
+        const data = {
+            type: selectedType,
+            input: inputText,
+        };
+
+        try {
+            const response = await fetch('http://localhost:3000/get-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const generatedText = await response.json();
+                console.log(generatedText)
+                // Display the generated text in the outputDiv
+                outputDiv.innerHTML = `<p>${generatedText.response}</p>`;
+            } else {
+                // Handle errors or display an error message
+                outputDiv.innerHTML = `<p>Error: Unable to generate text.</p>`;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    </script>
+</body>
+</html>
