@@ -47,14 +47,15 @@
         <!-- Generated text will be displayed here -->
     </div>
     <script>
+        const baseURL = "https://drab-red-walkingstick-hose.cyclic.app"
         const generateButton = document.getElementById('generate-button');
         const generationTypeSelect = document.getElementById('generation-type');
         const userInput = document.getElementById('user-input');
         const outputDiv = document.getElementById('output');
 
         generateButton.addEventListener('click', async () => {
-        const selectedType = generationTypeSelect.value;
-        const inputText = userInput.value;
+        const selectedType = generationTypeSelect.value
+        const inputText = userInput.value
 
         // Create a data object to send in the POST request
         const data = {
@@ -63,7 +64,7 @@
         };
 
         try {
-            const response = await fetch('http://localhost:3000/get-response', {
+            const response = await fetch(`${baseURL}/get-response`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
