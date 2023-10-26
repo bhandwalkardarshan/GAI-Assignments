@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Convertor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.29.0/min/vs/loader.js"></script>
+
+</head>
+<body>
+    <div id="options">
+        <select id="pro_lang">
+            <option value="javascript">Javascript</option>
+            <option value="java">Java</option>
+            <option value="python">Python</option>
+        </select>
+        <button id="convertBtn">Convert</button>
+        <button id="debugBtn">Debug</button>
+        <button id="qualityBtn">Quality Check</button>
+    </div>
+    <div id="editor" style="height: 500px; width: 500px"></div>
+    <div id="output"></div>
+</body>
+</html>
+<script>
+require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.29.0/min/vs' } });
+
+require(['vs/editor/editor.main'], function() {
+    // Initialize the Monaco Editor
+    var editor = monaco.editor.create(document.getElementById('editor'), {
+        value: [
+            '// Welcome to Code Converter!',
+            'console.log("Hello, world!");',
+        ].join('\n'),
+        language: "javascript"
+    });
+
+    var outputElement = document.getElementById('output');
+    var select = document.getElementById('pro_lang')
+    var convertBtn = document.getElementById('convertBtn')
+    var debugBtn = document.getElementById('debugBtn')
+    var qualityBtn = document.getElementById('qualityBtn')
+
+    // for code conversion
+    convertBtn.addEventListener('click', function() {
+        // Handle the onclick event (Convert button)
+        var code = editor.getValue();
+        console.log('Converting code:\n' + code);
+        // Make API call for code conversion
+        
+        // You can place your API call code here and update the 'output' div with the result.
+        // For example, you can use the Fetch API or other AJAX methods to send the code and receive the result.
+        output.innerHTML = 'Code conversion result will be displayed here.';
+    });
+
+    debugBtn.addEventListener('click', function() {
+        // Handle the onclick event (Debug button)
+        var code = editor.getValue();
+        console.log('Debugging code:\n' + code);
+        // Make API call for debugging
+        // You can place your API call code here and update the 'output' div with the result.
+        output.innerHTML = 'Debugging result will be displayed here.';
+    });
+
+    qualityBtn.addEventListener('click', function() {
+        // Handle the onclick event (Quality Check button)
+        var code = editor.getValue();
+        console.log('Performing quality check on code:\n' + code);
+        // Make API call for quality check
+        // You can place your API call code here and update the 'output' div with the result.
+        output.innerHTML = 'Quality check result will be displayed here.';
+    });
+});
+</script>
