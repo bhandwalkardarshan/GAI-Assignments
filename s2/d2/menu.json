@@ -18,9 +18,9 @@
         "id": "3"
     },
     {
-        "name": "Idli",
-        "price": 10.0,
+        "name": "Shevpuri",
+        "price": 20.0,
         "availability": true,
-        "id": "4"
+        "id": "5"
     }
 ]

@@ -63,7 +63,63 @@ def display_menu():
     except Exception as e:
         print("An error occurred while reading and displaying the menu:", str(e))
 
-# ...
+# Function to update an existing menu item's price and description
+def update_menu_item():
+    menu_data = read_menu_data()
+    item_name = input("Enter the name of the item you want to update: ")
+
+    # Find the selected item in the menu
+    selected_item = None
+    for item in menu_data:
+        if item["name"] == item_name:
+            selected_item = item
+            break
+
+    if selected_item:
+        print(f"Current details of {item_name}:")
+        print(f"Price: ${selected_item['price']:.2f}")
+        print(f"Availability: {selected_item['availability']}")
+        
+        new_price = float(input("Enter the new price: "))
+        # Validate the availability input
+        while True:
+            new_availability = input("Enter the new availability (yes or no): ").lower()
+            if new_availability in ["yes", "no"]:
+                break
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
+
+        # Convert the availability to a boolean
+        new_availability = True if new_availability == "yes" else False
+
+
+        selected_item['price'] = new_price
+        selected_item['availability'] = new_availability
+
+        write_menu_data(menu_data)
+        print(f"{item_name} has been updated.")
+    else:
+        print(f"{item_name} is not found in the menu.")
+
+# Function to delete a menu item by name
+def delete_menu_item():
+    menu_data = read_menu_data()
+    item_name = input("Enter the name of the item you want to delete: ")
+
+    # Find the menu item by name
+    item_to_delete = None
+    for item in menu_data:
+        if item["name"] == item_name:
+            item_to_delete = item
+            break
+
+    if item_to_delete:
+        menu_data.remove(item_to_delete)
+        write_menu_data(menu_data)
+        print(f"{item_name} has been deleted from the menu.")
+    else:
+        print(f"{item_name} is not found in the menu.")
+
 
 # Function to delete an item from the customer's order
 def delete_order(orders):
@@ -86,7 +142,7 @@ def delete_order(orders):
             print("Invalid input. Please enter a number.")
 
 # Function to place an order
-def place_order(orders):
+def place_order(customer_name,orders):
     while True:
         menu_data = read_menu_data()
         display_menu()
@@ -117,13 +173,22 @@ def admin_menu():
         print("\nAdmin Menu:")
         print("1. Add New Menu Item")
         print("2. Display Menu")
-        print("3. Quit")
+        print("3. Update Menu")
+        print("4. Delete Menu")
+        print("5. Main Menu")
+        print("6. Quit")
         choice = input("Enter your choice: ")
         if choice == "1":
             add_new_menu_item()
         elif choice == "2":
             display_menu()
         elif choice == "3":
+            update_menu_item()
+        elif choice == "4":
+            delete_menu_item()
+        elif choice == "5":
+            main()
+        elif choice == "6":
             break
         else:
             print("Invalid choice. Please select a valid option.")
@@ -131,6 +196,7 @@ def admin_menu():
 # Main function for the customer menu
 def customer_menu():
     orders = {"order": []}
+    customer_name = input("May I know your name, please?")
     while True:
         print("\nCustomer Menu:")
         print("1. Display Menu")
@@ -141,11 +207,11 @@ def customer_menu():
         if choice == "1":
             display_menu()
         elif choice == "2":
-            place_order(orders)
+            place_order(customer_name,orders)
         elif choice == "3":
             delete_order(orders)
         elif choice == "4":
-            break
+            main()
         else:
             print("Invalid choice. Please select a valid option.")
 
