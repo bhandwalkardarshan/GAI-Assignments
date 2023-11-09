@@ -1,0 +1,63 @@
+Developing a Node.js and MongoDB Parking Lot Management Application
+
+Objective:
+Create a Node.js application with MongoDB integration to manage parking lots for various vehicle types. The application should support multiple parking lots, each with different capacities for Two-Wheelers, Hatchback Cars, and SUV Cars. Each vehicle type should have its hourly rate card. Users should be able to park vehicles, calculate charges upon exit, and view complete parking history for a given vehicle.
+
+Features:
+
+Parking Lot and Vehicle Management:
+
+Implement functionality to manage multiple parking lots, each with distinct capacities for Two-Wheelers, Hatchback Cars, and SUV Cars.
+Define rate cards for each vehicle type.
+Seeding Initial Data:
+
+Seed initial data for parking lots, capacity for each vehicle type, and rate cards in MongoDB to provide a realistic demonstration environment.
+
+Vehicle Parking:
+
+Enable users to park a vehicle at a specified parking lot.
+The system should reject parking if the lot is full for the corresponding vehicle type.
+
+Exit and Payment:
+
+Implement functionality for users to exit the parking area, calculating the amount due based on the duration of parking and the hourly rate card.
+Display the amount due for the parking duration.
+
+Parking History:
+
+Allow users to view the complete parking history for a given vehicle.
+Display details such as the parking lot, parking area, duration, and the amount paid.
+Technical Requirements:
+
+Node.js Backend:
+
+Use Node.js to create a backend server for handling parking lot and vehicle-related functionalities.
+MongoDB Integration:
+
+Integrate MongoDB as the backend database to persist parking lot information, vehicle capacities, rate cards, and parking history.
+Define appropriate MongoDB schemas to store data securely.
+Express.js:
+
+Utilize Express.js to build RESTful API endpoints for managing parking lots, vehicle parking, exit calculations, and parking history.
+Data Persistence:
+
+Ensure that data is effectively stored and retrieved from MongoDB using Mongoose or another suitable library.
+Error Handling:
+
+Implement proper error handling for scenarios such as failed parking, exits, or data retrieval issues.
+Additional Considerations:
+
+Testing:
+
+Implement unit tests to validate the functionality of key components, including vehicle parking, exit calculations, and data retrieval from MongoDB.
+Documentation:
+
+Provide clear documentation for setting up the project, running the application, and any other relevant details.
+Code Comments:
+
+Add comments in the code to explain complex logic or any crucial implementation details.
+User Notifications:
+
+Consider incorporating user-friendly notifications for successful parking, exit calculations, or other relevant interactions.
+Delivery:
+Submit the Node.js codebase along with any necessary setup instructions, database schema, and documentation. The goal is to demonstrate your ability to build a robust and functional Node.js application for managing parking lots with MongoDB integration.
